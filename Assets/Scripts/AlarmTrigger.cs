@@ -1,18 +1,18 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class AlarmTrigger : MonoBehaviour
 {
-    [SerializeField] private Alarm _alarm;
+    public event Action TriggerEntered;
+    public event Action TriggerExited;
     
     private void OnTriggerEnter(Collider other)
     {
-        _alarm.TurnOn();
+        TriggerEntered?.Invoke();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        _alarm.TurnOff();
+        TriggerExited?.Invoke();
     }
 }

@@ -4,13 +4,26 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
+    [SerializeField] private DoorTrigger _doorTrigger;
     
-    public void Open()
+    private void OnEnable()
+    {
+        _doorTrigger.TriggerEntered += Open;
+        _doorTrigger.TriggerExited += Close;
+    }
+
+    private void OnDisable()
+    {
+        _doorTrigger.TriggerEntered -= Open;
+        _doorTrigger.TriggerExited -= Close;
+    }
+    
+    private void Open()
     {
        _animator.SetBool("IsOpen", true);
     }
 
-    public void Close()
+    private void Close()
     {
         _animator.SetBool("IsOpen", false);
     }

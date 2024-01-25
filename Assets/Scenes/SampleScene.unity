@@ -389,6 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 989596645}
+  _doorTrigger: {fileID: 1711238651}
 --- !u!95 &989596645
 Animator:
   serializedVersion: 5
@@ -476,7 +477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a48f613bfb4348fda3a0559779d451f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _alarm: {fileID: 1431763689}
 --- !u!1 &1348204072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1845742921716089003, guid: 20818fda9cf85f94ca4d9803d50fb8d8, type: 3}
@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94ac12fb16464996aeab1473e3d9f6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0
+  _speed: 2
   _route: {fileID: 1805104298}
   _animator: {fileID: 1348204075}
 --- !u!1 &1431763688
@@ -583,6 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 1431763690}
+  _alarmTrigger: {fileID: 1227427184}
 --- !u!82 &1431763690
 AudioSource:
   m_ObjectHideFlags: 0
@@ -943,7 +944,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376a51871219144408cbdd1654848a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _door: {fileID: 989596644}
 --- !u!1 &1759918984
 GameObject:
   m_ObjectHideFlags: 0
