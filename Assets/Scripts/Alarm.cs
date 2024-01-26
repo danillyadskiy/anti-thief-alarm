@@ -23,32 +23,30 @@ public class Alarm : MonoBehaviour
         _alarmTrigger.TriggerExited -= TurnOff;
     }
 
+    private void Start()
+    {
+        StartCoroutine(MakeSound());
+    }
+
     private void TurnOn()
     {
         _isWorking = true;
-        StartCoroutine(TurnUpSound());
     }
 
     private void TurnOff()
     {
         _isWorking = false;
-        StartCoroutine(TurnDownSound());
     }
 
-    private IEnumerator TurnUpSound()
+    private IEnumerator MakeSound()
     {
-        while (_isWorking)
+        while (true)
         {
-            _audioSource.volume = Mathf.Clamp01(_audioSource.volume + Time.deltaTime * Speed);
-            yield return null;
-        }
-    }
-    
-    private IEnumerator TurnDownSound()
-    {
-        while (!_isWorking)
-        {
-            _audioSource.volume = Mathf.Clamp01(_audioSource.volume - Time.deltaTime * Speed);
+            if (_isWorking)
+                _audioSource.volume = Mathf.Clamp01(_audioSource.volume + Time.deltaTime * Speed);
+            else
+                _audioSource.volume = Mathf.Clamp01(_audioSource.volume - Time.deltaTime * Speed);
+            
             yield return null;
         }
     }
