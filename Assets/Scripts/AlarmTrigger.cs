@@ -8,11 +8,13 @@ public class AlarmTrigger : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        TriggerEntered?.Invoke();
+        if (other.GetComponent<Thief>())
+            TriggerEntered?.Invoke();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        TriggerExited?.Invoke();
+        if (other.GetComponent<Thief>())
+            TriggerExited?.Invoke();
     }
 }

@@ -39,12 +39,14 @@ public class Alarm : MonoBehaviour
 
     private IEnumerator MakeSound()
     {
+        float volumeDelta = Time.deltaTime * Speed;
+        
         while (true)
         {
             if (_isWorking)
-                _audioSource.volume = Mathf.Clamp01(_audioSource.volume + Time.deltaTime * Speed);
+                _audioSource.volume += volumeDelta;
             else
-                _audioSource.volume = Mathf.Clamp01(_audioSource.volume - Time.deltaTime * Speed);
+                _audioSource.volume -= volumeDelta;
             
             yield return null;
         }
