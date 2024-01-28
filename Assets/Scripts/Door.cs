@@ -3,9 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Door : MonoBehaviour
 {
+    public readonly int IsOpen = Animator.StringToHash(nameof(IsOpen));
+
     [SerializeField] private Animator _animator;
     [SerializeField] private DoorTrigger _doorTrigger;
-    
+
     private void OnEnable()
     {
         _doorTrigger.TriggerEntered += Open;
@@ -20,11 +22,11 @@ public class Door : MonoBehaviour
     
     private void Open()
     {
-       _animator.SetBool("IsOpen", true);
+        _animator.SetBool(IsOpen, true);
     }
 
     private void Close()
     {
-        _animator.SetBool("IsOpen", false);
+        _animator.SetBool(IsOpen, false);
     }
 }
