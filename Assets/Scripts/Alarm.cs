@@ -8,47 +8,60 @@ public class Alarm : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AlarmTrigger _alarmTrigger;
 
-    private bool _isWorking;
+    private IEnumerator _coroutine;
 
+    private float VolumeDelta => Time.deltaTime * Speed;
+    
     private void OnEnable()
     {
-        _alarmTrigger.TriggerEntered += TurnOn;
-        _alarmTrigger.TriggerExited += TurnOff;
+        _alarmTrigger.Entered += TurnOn;
+        _alarmTrigger.Exited += TurnOff;
     }
 
     private void OnDisable()
     {
-        _alarmTrigger.TriggerEntered -= TurnOn;
-        _alarmTrigger.TriggerExited -= TurnOff;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(MakeSound());
+        _alarmTrigger.Entered -= TurnOn;
+        _alarmTrigger.Exited -= TurnOff;
     }
 
     private void TurnOn()
     {
-        _isWorking = true;
+        RunCoroutine(MakeSoundLouder());
     }
 
     private void TurnOff()
     {
-        _isWorking = false;
+        RunCoroutine(MakeSoundQuieter());
     }
 
-    private IEnumerator MakeSound()
+    private IEnumerator MakeSoundLouder()
     {
-        float volumeDelta = Time.deltaTime * Speed;
+        float maxVolume = 1.0f;
         
-        while (true)
+        while (_audioSource.volume < maxVolume)
         {
-            if (_isWorking)
-                _audioSource.volume += volumeDelta;
-            else
-                _audioSource.volume -= volumeDelta;
-            
+            _audioSource.volume += VolumeDelta;
             yield return null;
         }
+    }
+
+    private IEnumerator MakeSoundQuieter()
+    {
+        float minVolume = 0.0f;
+
+        while (_audioSource.volume > minVolume)
+        {
+            _audioSource.volume -= VolumeDelta;
+            yield return null;
+        }
+    }
+    
+    private void RunCoroutine(IEnumerator coroutine)
+    {
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+        
+        _coroutine = coroutine;
+        StartCoroutine(_coroutine);
     }
 }

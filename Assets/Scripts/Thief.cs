@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Thief : MonoBehaviour
 {
+    public readonly int Speed = Animator.StringToHash(nameof(Speed));
+
     [SerializeField, Min(0)] private float _speed;
     [SerializeField] private Transform _route;
     [SerializeField] private Animator _animator;
@@ -46,6 +48,6 @@ public class Thief : MonoBehaviour
     
     private void UpdateAnimator()
     {
-        _animator.SetFloat("Speed", _speed);
+        _animator.SetFloat(Speed, _speed);
     }
 }

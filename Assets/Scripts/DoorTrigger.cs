@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
-    public event Action TriggerEntered;
-    public event Action TriggerExited;
+    public event Action Entered;
+    public event Action Exited;
     
     private void OnTriggerEnter(Collider other)
     {
-        TriggerEntered?.Invoke();
+        Entered?.Invoke();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        TriggerExited?.Invoke();
+        Exited?.Invoke();
     }
 }

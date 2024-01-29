@@ -10,14 +10,14 @@ public class Door : MonoBehaviour
 
     private void OnEnable()
     {
-        _doorTrigger.TriggerEntered += Open;
-        _doorTrigger.TriggerExited += Close;
+        _doorTrigger.Entered += Open;
+        _doorTrigger.Exited += Close;
     }
 
     private void OnDisable()
     {
-        _doorTrigger.TriggerEntered -= Open;
-        _doorTrigger.TriggerExited -= Close;
+        _doorTrigger.Entered -= Open;
+        _doorTrigger.Exited -= Close;
     }
     
     private void Open()
